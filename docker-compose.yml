@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: techsecure_mysql
+    restart: always
+    environment:
+      # Même si tu n'as pas de mot de passe en local sur ton Workbench,
+      # Docker exige la création d'un mot de passe pour son propre conteneur MySQL.
+      MYSQL_ROOT_PASSWORD: techsecure_docker_password123
+      MYSQL_DATABASE: techsecure_db
+    ports:
+      # Permet de connecter ton MySQL Workbench local au MySQL de Docker si besoin (port 3306)
+      - "3306:3306"
+    networks:
+      - techsecure_network
+
+  web:
+    build: .
+    container_name: techsecure_flask
+    restart: always
+    ports:
+      # Expose l'application Flask vers ton navigateur (http://localhost:5000)
+      - "5000:5000"
+    environment:
+      - FLASK_SECRET_KEY=9a8b7c6d5e4f3g2h1i0j_votre_super_cle_aleatoire_et_longue_greta
+      - FLASK_DEBUG=False
+      # ⚠️ TRÈS IMPORTANT POUR LE TP : L'hôte n'est plus 'localhost', 
+      # c'est le nom du service Docker 'db' défini juste au-dessus.
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=techsecure_docker_password123
+      - DB_NAME=techsecure_db
+    depends_on:
+      - db
+    networks:
+      - techsecure_network
+
+networks:
+  techsecure_network:
+    driver: bridge
