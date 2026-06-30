@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - TechSecure Solutions</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; }
+        
+        /* En-tête bleu marine conforme aux maquettes */
+        header { background-color: #002266; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* Conteneur et taille du logo */
+        .logo-container { display: flex; align-items: center; }
+        .logo { height: 50px; width: auto; background-color: white; padding: 5px; border-radius: 4px; }
+        
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #007bff; }
+        
+        /* Section Bannière avec l'image entreprise/réseau en fond */
+        .hero-banner { 
+            text-align: center; 
+            padding: 100px 20px; 
+            color: white; 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-banner h1 { font-size: 2.5rem; margin-bottom: 15px; line-height: 1.2; font-weight: 800; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+        .hero-banner p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 25px auto; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+        
+        .btn-primary { display: inline-block; background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 5px; transition: background 0.3s; }
+        .btn-primary:hover { background-color: #0056b3; }
+        
+        /* Section Contenu Principal */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { text-align: center; color: #002266; font-size: 2rem; margin-bottom: 5px; letter-spacing: 1px; }
+        .underline { width: 60px; height: 4px; background-color: #007bff; margin: 0 auto 40px auto; border-radius: 2px; }
+        
+        /* Grille des cartes filiales (Villes) */
+        .grid-filiales { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 5px; }
+        .card-filiale { background: white; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; text-align: center; width: 280px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .card-filiale:hover { transform: translateY(-5px); }
+        
+        /* Calibrage des photos de villes */
+        .card-filiale img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; }
+        .card-filiale h3 { margin: 10px 0 5px 0; color: #002266; font-size: 1.3rem; }
+        .card-filiale .subtitle { color: #666; font-size: 0.9rem; margin: 0; font-weight: 500; }
+        
+        footer { background-color: #111; color: #aaa; text-align: center; padding: 20px; margin-top: 60px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='IMAGE/logo.png') }}" alt="TechSecure Solutions" class="logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}" class="active">Accueil</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('filiales') }}">Filiales</a>
+            <a href="{{ url_for('apropos') }}">À Propos</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero-banner" style="background-image: linear-gradient(rgba(0, 34, 102, 0.75), rgba(0, 34, 102, 0.85)), url('{{ url_for('static', filename='IMAGE/entreprise.jpg') }}');">
+        <h1>Des solutions<br>informatiques sécurisées<br>pour votre entreprise</h1>
+        <p>Nous accompagnons les entreprises dans leur transformation digitale avec des services fiables, sécurisés et innovants.</p>
+        <a href="{{ url_for('services') }}" class="btn-primary">DÉCOUVRIR NOS SERVICES</a>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">NOS FILIALES</h2>
+        <div class="underline"></div>
+        
+        <div class="grid-filiales">
+            <div class="card-filiale">
+                <img src="{{ url_for('static', filename='IMAGE/paris.jpg') }}" alt="Filiale de Paris">
+                <h3>PARIS</h3>
+                <p class="subtitle">Siège social</p>
+            </div>
+
+            <div class="card-filiale">
+                <img src="{{ url_for('static', filename='IMAGE/lyon.jpg') }}" alt="Filiale de Lyon">
+                <h3>LYON</h3>
+                <p class="subtitle">Agence régionale</p>
+            </div>
+
+            <div class="card-filiale">
+                <img src="{{ url_for('static', filename='IMAGE/marseille.jpg') }}" alt="Filiale de Marseille">
+                <h3>MARSEILLE</h3>
+                <p class="subtitle">Agence régionale</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 TechSecure Solutions - Infrastructure Web Sécurisée</p>
+    </footer>
+
+</body>
+</html>

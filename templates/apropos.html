@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - TechSecure Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; }
+        
+        /* En-tête bleu marine */
+        header { background-color: #002266; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; }
+        .logo { height: 50px; width: auto; background-color: white; padding: 5px; border-radius: 4px; }
+        
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #007bff; }
+        
+        /* Layout de la page À Propos */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { text-align: center; color: #002266; font-size: 2rem; margin-bottom: 5px; letter-spacing: 1px; }
+        .underline { width: 60px; height: 4px; background-color: #007bff; margin: 0 auto 40px auto; border-radius: 2px; }
+        
+        /* Conteneur en deux colonnes */
+        .about-content { display: flex; gap: 50px; align-items: center; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e1e4e8; flex-wrap: wrap; }
+        .about-text { flex: 1; min-width: 300px; }
+        .about-text h3 { color: #002266; font-size: 1.6rem; margin-top: 0; margin-bottom: 15px; }
+        .about-text p { line-height: 1.7; color: #555; font-size: 1.05rem; margin-bottom: 15px; }
+        
+        .about-image { flex: 1; min-width: 300px; text-align: center; }
+        .about-image img { width: 100%; max-height: 380px; object-fit: cover; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        footer { background-color: #111; color: #aaa; text-align: center; padding: 20px; margin-top: 60px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='IMAGE/logo.png') }}" alt="TechSecure Solutions" class="logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('filiales') }}">Filiales</a>
+            <a href="{{ url_for('apropos') }}" class="active">À Propos</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+
+    <section class="container">
+        <h2 class="section-title">À PROPOS DE NOUS</h2>
+        <div class="underline"></div>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Une expertise reconnue en sécurité numérique</h3>
+                <p>Fondée avec la volonté de sécuriser les infrastructures numériques critiques des entreprises, <strong>TechSecure Solutions</strong> est devenue en quelques années un partenaire technologique incontournable.</p>
+                <p>Grâce à nos équipes d'experts basées dans nos différentes agences à Paris, Lyon et Marseille, nous intervenons au plus près de nos clients pour auditer, concevoir et maintenir des environnements Cloud et réseaux hautement résilients face aux cybermenaces actuelles.</p>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='IMAGE/entreprise.jpg') }}" alt="Locaux de l'entreprise TechSecure">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 TechSecure Solutions - Infrastructure Web Sécurisée</p>
+    </footer>
+
+</body>
+</html>

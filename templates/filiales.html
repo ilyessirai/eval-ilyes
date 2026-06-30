@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Filiales - TechSecure Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; }
+        
+        /* En-tête bleu marine */
+        header { background-color: #002266; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; }
+        .logo { height: 50px; width: auto; background-color: white; padding: 5px; border-radius: 4px; }
+        
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #007bff; }
+        
+        /* Conteneur principal */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { text-align: center; color: #002266; font-size: 2rem; margin-bottom: 5px; letter-spacing: 1px; }
+        .underline { width: 60px; height: 4px; background-color: #007bff; margin: 0 auto 40px auto; border-radius: 2px; }
+        
+        /* Grille de cartes moderne */
+        .grid-agences { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+        .card-agence { background: white; border: 1px solid #e1e4e8; border-radius: 12px; overflow: hidden; width: 340px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+        .card-agence:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        
+        /* Zone Photo */
+        .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; position: relative; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .badge-status { position: absolute; top: 15px; right: 15px; background-color: #28a745; color: white; padding: 5px 12px; font-size: 0.8rem; font-weight: bold; border-radius: 20px; letter-spacing: 0.5px; }
+        
+        /* Zone Texte & Infos */
+        .card-body { padding: 25px; }
+        .card-body h3 { margin: 0 0 15px 0; color: #002266; font-size: 1.5rem; border-bottom: 2px solid #f4f6f9; padding-bottom: 10px; }
+        
+        .info-item { margin-bottom: 14px; font-size: 0.95rem; color: #555; line-height: 1.4; }
+        .info-item strong { color: #333; display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+        
+        .horaires-list { margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666; }
+        .horaires-list li { display: flex; justify-content: space-between; padding: 2px 0; }
+        
+        footer { background-color: #111; color: #aaa; text-align: center; padding: 20px; margin-top: 60px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='IMAGE/logo.png') }}" alt="TechSecure Solutions" class="logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('filiales') }}" class="active">Filiales</a>
+            <a href="{{ url_for('apropos') }}">À Propos</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+
+    <section class="container">
+        <h2 class="section-title">NOS AGENCES RÉGIONALES</h2>
+        <div class="underline"></div>
+        
+        <div class="grid-agences">
+            <div class="card-agence">
+                <div class="card-img-wrapper">
+                    <img src="{{ url_for('static', filename='IMAGE/paris.jpg') }}" alt="Agence de Paris">
+                    <span class="badge-status">Siège Social</span>
+                </div>
+                <div class="card-body">
+                    <h3>PARIS</h3>
+                    <div class="info-item">
+                        <strong>Adresse</strong>
+                        12 Rue de la Paix, 75002 Paris
+                    </div>
+                    <div class="info-item">
+                        <strong>Responsable d'agence</strong>
+                        Alice Smith
+                    </div>
+                    <div class="info-item">
+                        <strong>Contact</strong>
+                        paris@techsecure.fr | +33 1 40 00 00 01
+                    </div>
+                    <div class="info-item">
+                        <strong>Horaires d'ouverture</strong>
+                        <ul class="horaires-list">
+                            <li><span>Lundi - Jeudi :</span> <span>08:30 - 18:00</span></li>
+                            <li><span>Vendredi :</span> <span>08:30 - 17:00</span></li>
+                            <li><span>Samedi - Dimanche :</span> <span style="color: #dc3545; font-weight: 500;">Fermé</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-agence">
+                <div class="card-img-wrapper">
+                    <img src="{{ url_for('static', filename='IMAGE/lyon.jpg') }}" alt="Agence de Lyon">
+                    <span class="badge-status">Ouvert</span>
+                </div>
+                <div class="card-body">
+                    <h3>LYON</h3>
+                    <div class="info-item">
+                        <strong>Adresse</strong>
+                        45 Cours Lafayette, 69006 Lyon
+                    </div>
+                    <div class="info-item">
+                        <strong>Responsable d'agence</strong>
+                        Marc Dubois
+                    </div>
+                    <div class="info-item">
+                        <strong>Contact</strong>
+                        lyon@techsecure.fr | +33 4 72 00 00 02
+                    </div>
+                    <div class="info-item">
+                        <strong>Horaires d'ouverture</strong>
+                        <ul class="horaires-list">
+                            <li><span>Lundi - Vendredi :</span> <span>09:00 - 12:30, 14:00 - 18:00</span></li>
+                            <li><span>Samedi - Dimanche :</span> <span style="color: #dc3545; font-weight: 500;">Fermé</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-agence">
+                <div class="card-img-wrapper">
+                    <img src="{{ url_for('static', filename='IMAGE/marseille.jpg') }}" alt="Agence de Marseille">
+                    <span class="badge-status">Ouvert</span>
+                </div>
+                <div class="card-body">
+                    <h3>MARSEILLE</h3>
+                    <div class="info-item">
+                        <strong>Adresse</strong>
+                        30 Quai du Port, 13002 Marseille
+                    </div>
+                    <div class="info-item">
+                        <strong>Responsable d'agence</strong>
+                        Inès Rami
+                    </div>
+                    <div class="info-item">
+                        <strong>Contact</strong>
+                        marseille@techsecure.fr | +33 4 91 00 00 03
+                    </div>
+                    <div class="info-item">
+                        <strong>Horaires d'ouverture</strong>
+                        <ul class="horaires-list">
+                            <li><span>Lundi - Vendredi :</span> <span>09:00 - 12:00, 13:30 - 17:30</span></li>
+                            <li><span>Samedi - Dimanche :</span> <span style="color: #dc3545; font-weight: 500;">Fermé</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 TechSecure Solutions - Infrastructure Web Sécurisée</p>
+    </footer>
+
+</body>
+</html>

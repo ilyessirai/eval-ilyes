@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - TechSecure Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; }
+        
+        /* En-tête bleu marine */
+        header { background-color: #002266; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; }
+        .logo { height: 50px; width: auto; background-color: white; padding: 5px; border-radius: 4px; }
+        
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #007bff; }
+        
+        /* Layout de la page Contact */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { text-align: center; color: #002266; font-size: 2rem; margin-bottom: 5px; letter-spacing: 1px; }
+        .underline { width: 60px; height: 4px; background-color: #007bff; margin: 0 auto 40px auto; border-radius: 2px; }
+        
+        /* Box de contact en 2 colonnes */
+        .contact-box { display: flex; gap: 40px; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e1e4e8; flex-wrap: wrap; }
+        
+        /* Formulaire */
+        .contact-form { flex: 1.5; min-width: 300px; }
+        .contact-form h3 { color: #002266; margin-top: 0; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; font-size: 1rem; }
+        .form-group input:focus, .form-group textarea:focus { border-color: #007bff; outline: none; }
+        
+        .btn-submit { background-color: #007bff; color: white; padding: 12px 24px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s; width: 100%; font-size: 1rem; }
+        .btn-submit:hover { background-color: #0056b3; }
+        
+        /* Infos de contact */
+        .contact-info { flex: 1; min-width: 280px; background-color: #f8f9fa; padding: 30px; border-radius: 6px; border: 1px solid #e1e4e8; }
+        .contact-info h3 { color: #002266; margin-top: 0; }
+        .contact-info p { line-height: 1.6; margin-bottom: 15px; color: #555; }
+        .contact-info strong { color: #333; }
+        
+        footer { background-color: #111; color: #aaa; text-align: center; padding: 20px; margin-top: 60px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='IMAGE/logo.png') }}" alt="TechSecure Solutions" class="logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('filiales') }}">Filiales</a>
+            <a href="{{ url_for('apropos') }}">À Propos</a>
+            <a href="{{ url_for('contact') }}" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <section class="container">
+        <h2 class="section-title">CONTACTEZ-NOUS</h2>
+        <div class="underline"></div>
+        
+        <div class="contact-box">
+            <div class="contact-form">
+                <h3>Envoyez-nous un message</h3>
+                <form action="#" method="POST" onsubmit="alert('Message envoyé (Simulation)'); return false;">
+                    <div class="form-group">
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" required placeholder="Ex: Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" id="email" required placeholder="Ex: jean.dupont@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre message</label>
+                        <textarea id="message" rows="5" required placeholder="Comment pouvons-nous vous aider ?"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">ENVOYER LE MESSAGE</button>
+                </form>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Nos coordonnées</h3>
+                <p><strong>Téléphone :</strong> +33 (0)1 00 00 00 00</p>
+                <p><strong>Email :</strong> contact@techsecure-solutions.fr</p>
+                <p><strong>Support Technique :</strong> 24h/7j pour les clients sous contrat.</p>
+                <hr style="border: 0; border-top: 1px solid #e1e4e8; margin: 20px 0;">
+                <p style="font-size: 0.9rem; color: #666;">

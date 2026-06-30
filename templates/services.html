@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Services - TechSecure Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; }
+        header { background-color: #002266; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; }
+        .logo { height: 50px; width: auto; background-color: white; padding: 5px; border-radius: 4px; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #007bff; }
+        
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { text-align: center; color: #002266; font-size: 2rem; margin-bottom: 5px; letter-spacing: 1px; }
+        .underline { width: 60px; height: 4px; background-color: #007bff; margin: 0 auto 20px auto; border-radius: 2px; }
+        .intro-text { text-align: center; color: #666; max-width: 600px; margin: 0 auto 40px auto; font-size: 1.1rem; }
+        
+        /* Grille des services */
+        .grid-services { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
+        .card-service { background: white; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; text-align: center; width: 280px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .card-service:hover { transform: translateY(-5px); }
+        .card-service img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; }
+        .card-service h3 { margin: 10px 0 10px 0; color: #002266; font-size: 1.2rem; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+        .card-service p { color: #555; font-size: 0.95rem; line-height: 1.5; margin: 0; }
+        
+        footer { background-color: #111; color: #aaa; text-align: center; padding: 20px; margin-top: 60px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='IMAGE/logo.png') }}" alt="TechSecure Solutions" class="logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('services') }}" class="active">Services</a>
+            <a href="{{ url_for('filiales') }}">Filiales</a>
+            <a href="{{ url_for('apropos') }}">À Propos</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+
+    <section class="container">
+        <h2 class="section-title">NOS SERVICES</h2>
+        <div class="underline"></div>
+        <p class="intro-text">Découvrez nos expertises conçues pour accompagner et sécuriser votre infrastructure.</p>
+        
+        <div class="grid-services">
+            <div class="card-service">
+                <img src="{{ url_for('static', filename='IMAGE/cyber.jpg') }}" alt="Cybersécurité">
+                <h3>CYBERSÉCURITÉ</h3>
+                <p>Protection globale de vos réseaux et audits complets de vulnérabilités système.</p>
+            </div>
+
+            <div class="card-service">
+                <img src="{{ url_for('static', filename='IMAGE/cloud.jpg') }}" alt="Cloud Computing">
+                <h3>CLOUD COMPUTING</h3>
+                <p>Déploiement, migration et supervision d'infrastructures Cloud hautement sécurisées.</p>
+            </div>
+
+            <div class="card-service">
+                <img src="{{ url_for('static', filename='IMAGE/reseau.jpg') }}" alt="Supervision Réseau">
+                <h3>SUPERVISION RÉSEAU</h3>
+                <p>Contrôle en temps réel de vos équipements réseaux pour garantir une haute disponibilité.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 TechSecure Solutions - Infrastructure Web Sécurisée</p>
+    </footer>
+
+</body>
+</html>
