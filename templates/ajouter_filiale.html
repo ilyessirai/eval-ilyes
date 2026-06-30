@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une Filiale - TechSecure Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; }
+        
+        header { background-color: #002266; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo { height: 50px; width: auto; background-color: white; padding: 5px; border-radius: 4px; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover, nav a.active { color: #007bff; }
+        
+        .container { max-width: 600px; margin: 40px auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e1e4e8; }
+        .section-title { text-align: center; color: #002266; margin-bottom: 5px; }
+        .underline { width: 50px; height: 4px; background-color: #007bff; margin: 0 auto 30px auto; border-radius: 2px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; color: #002266; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+        .form-group input:focus { border-color: #007bff; outline: none; box-shadow: 0 0 5px rgba(0,123,255,0.2); }
+        
+        .btn-submit { width: 100%; background-color: #007bff; color: white; border: none; padding: 12px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
+        .btn-submit:hover { background-color: #0056b3; }
+        
+        .alert { padding: 10px; margin-bottom: 20px; border-radius: 6px; font-size: 0.9rem; font-weight: 500; }
+        .alert-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        
+        footer { background-color: #111; color: #aaa; text-align: center; padding: 20px; margin-top: 60px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='IMAGE/logo.png') }}" alt="TechSecure Solutions" class="logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('filiales') }}">Filiales</a>
+            <a href="{{ url_for('ajouter_filiale') }}" class="active">+ Ajouter</a>
+            <a href="{{ url_for('apropos') }}">À Propos</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">AJOUTER UNE FILIALE</h2>
+        <div class="underline"></div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('ajouter_filiale') }}" method="POST">
+            <div class="form-group">
+                <label for="nom">Nom de la ville *</label>
+                <input type="text" id="nom" name="nom" placeholder="Ex: NANTES" required>
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse complète *</label>
+                <input type="text" id="adresse" name="adresse" placeholder="Ex: 5 Rue de la Marne, 44000 Nantes" required>
+            </div>
+            <div class="form-group">
+                <label for="chef">Responsable d'agence *</label>
+                <input type="text" id="chef" name="chef" placeholder="Ex: Sophie Martin" required>
+            </div>
+            <div class="form-group">
+                <label for="telephone">Téléphone de contact</label>
+                <input type="text" id="telephone" name="telephone" placeholder="Ex: +33 2 40 00 00 04">
+            </div>
+            <div class="form-group">
+                <label for="email">Email professionnel</label>
+                <input type="email" id="email" name="email" placeholder="Ex: nantes@techsecure.fr">
+            </div>
+            <div class="form-group">
+                <label for="horaires">Horaires d'ouverture</label>
+                <input type="text" id="horaires" name="horaires" placeholder="Ex: Lun-Ven: 9h00-12h00, 14h00-18h00">
+            </div>
+            
+            <button type="submit" class="btn-submit">ENREGISTRER LA FILIALE</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TechSecure Solutions - Infrastructure Web Sécurisée</p>
+    </footer>
+
+</body>
+</html>

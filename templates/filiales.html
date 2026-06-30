@@ -19,28 +19,39 @@
         
         /* Conteneur principal */
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { text-align: center; color: #002266; font-size: 2rem; margin-bottom: 5px; letter-spacing: 1px; }
-        .underline { width: 60px; height: 4px; background-color: #007bff; margin: 0 auto 40px auto; border-radius: 2px; }
         
-        /* Grille de cartes moderne */
+        /* Structure de l'alignement Titre + Bouton d'ajout */
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        .section-title { color: #002266; font-size: 2rem; margin: 0; letter-spacing: 1px; }
+        
+        /* Design du bouton Ajouter une filiale */
+        .btn-add { background-color: #007bff; color: white; text-decoration: none; padding: 11px 22px; font-weight: bold; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,123,255,0.3); transition: background 0.3s, transform 0.2s; display: inline-block; }
+        .btn-add:hover { background-color: #0056b3; transform: translateY(-1px); }
+        
+        .underline { width: 60px; height: 4px; background-color: #007bff; margin: 10px 0 40px 0; border-radius: 2px; }
+        
+        /* Disposition en grille responsive des agences */
         .grid-agences { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
         .card-agence { background: white; border: 1px solid #e1e4e8; border-radius: 12px; overflow: hidden; width: 340px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
         .card-agence:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         
-        /* Zone Photo */
-        .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; position: relative; }
+        /* Image avec Badge d'état intégré */
+        .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; position: relative; background-color: #002266; }
         .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .badge-status { position: absolute; top: 15px; right: 15px; background-color: #28a745; color: white; padding: 5px 12px; font-size: 0.8rem; font-weight: bold; border-radius: 20px; letter-spacing: 0.5px; }
         
-        /* Zone Texte & Infos */
+        /* Badges Ouvert / Fermé */
+        .badge-status { position: absolute; top: 15px; right: 15px; color: white; padding: 5px 12px; font-size: 0.8rem; font-weight: bold; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .open { background-color: #28a745; }
+        .closed { background-color: #dc3545; }
+        
+        /* Contenu textuel de la carte */
         .card-body { padding: 25px; }
         .card-body h3 { margin: 0 0 15px 0; color: #002266; font-size: 1.5rem; border-bottom: 2px solid #f4f6f9; padding-bottom: 10px; }
         
         .info-item { margin-bottom: 14px; font-size: 0.95rem; color: #555; line-height: 1.4; }
         .info-item strong { color: #333; display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
         
-        .horaires-list { margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666; }
-        .horaires-list li { display: flex; justify-content: space-between; padding: 2px 0; }
+        .alert-db { background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; border: 1px solid #f5c6cb; text-align: center; width: 100%; }
         
         footer { background-color: #111; color: #aaa; text-align: center; padding: 20px; margin-top: 60px; font-size: 0.9rem; }
     </style>
@@ -61,97 +72,51 @@
     </header>
 
     <section class="container">
-        <h2 class="section-title">NOS AGENCES RÉGIONALES</h2>
+        <div class="section-header">
+            <h2 class="section-title">NOS AGENCES RÉGIONALES</h2>
+            <a href="{{ url_for('ajouter_filiale') }}" class="btn-add">+ AJOUTER UNE FILIALE</a>
+        </div>
         <div class="underline"></div>
         
         <div class="grid-agences">
-            <div class="card-agence">
-                <div class="card-img-wrapper">
-                    <img src="{{ url_for('static', filename='IMAGE/paris.jpg') }}" alt="Agence de Paris">
-                    <span class="badge-status">Siège Social</span>
+            {% if db_error %}
+                <div class="alert-db">
+                    <strong>⚠️ Problème de chargement de la base de données MySQL.</strong><br>
+                    Assurez-vous que votre instance locale sur MySQL Workbench est démarrée.
                 </div>
-                <div class="card-body">
-                    <h3>PARIS</h3>
-                    <div class="info-item">
-                        <strong>Adresse</strong>
-                        12 Rue de la Paix, 75002 Paris
+            {% else %}
+                {% for filiale in filiales %}
+                <div class="card-agence" id="agence-{{ filiale.nom.lower() }}">
+                    <div class="card-img-wrapper">
+                        {% if filiale.nom in ['PARIS', 'LYON', 'MARSEILLE'] %}
+                            <img src="{{ url_for('static', filename='IMAGE/' + filiale.nom.lower() + '.jpg') }}" alt="Agence de {{ filiale.nom }}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='IMAGE/reseau.jpg') }}" alt="Nouvelle Agence">
+                        {% endif %}
+                        <span class="badge-status" id="badge-{{ filiale.nom.lower() }}">Calcul...</span>
                     </div>
-                    <div class="info-item">
-                        <strong>Responsable d'agence</strong>
-                        Alice Smith
-                    </div>
-                    <div class="info-item">
-                        <strong>Contact</strong>
-                        paris@techsecure.fr | +33 1 40 00 00 01
-                    </div>
-                    <div class="info-item">
-                        <strong>Horaires d'ouverture</strong>
-                        <ul class="horaires-list">
-                            <li><span>Lundi - Jeudi :</span> <span>08:30 - 18:00</span></li>
-                            <li><span>Vendredi :</span> <span>08:30 - 17:00</span></li>
-                            <li><span>Samedi - Dimanche :</span> <span style="color: #dc3545; font-weight: 500;">Fermé</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-agence">
-                <div class="card-img-wrapper">
-                    <img src="{{ url_for('static', filename='IMAGE/lyon.jpg') }}" alt="Agence de Lyon">
-                    <span class="badge-status">Ouvert</span>
-                </div>
-                <div class="card-body">
-                    <h3>LYON</h3>
-                    <div class="info-item">
-                        <strong>Adresse</strong>
-                        45 Cours Lafayette, 69006 Lyon
-                    </div>
-                    <div class="info-item">
-                        <strong>Responsable d'agence</strong>
-                        Marc Dubois
-                    </div>
-                    <div class="info-item">
-                        <strong>Contact</strong>
-                        lyon@techsecure.fr | +33 4 72 00 00 02
-                    </div>
-                    <div class="info-item">
-                        <strong>Horaires d'ouverture</strong>
-                        <ul class="horaires-list">
-                            <li><span>Lundi - Vendredi :</span> <span>09:00 - 12:30, 14:00 - 18:00</span></li>
-                            <li><span>Samedi - Dimanche :</span> <span style="color: #dc3545; font-weight: 500;">Fermé</span></li>
-                        </ul>
+                    <div class="card-body">
+                        <h3>{{ filiale.nom }} {% if filiale.nom == 'PARIS' %}(Siège){% endif %}</h3>
+                        <div class="info-item">
+                            <strong>Adresse</strong>
+                            {{ filiale.adresse }}
+                        </div>
+                        <div class="info-item">
+                            <strong>Responsable d'agence</strong>
+                            {{ filiale.chef }}
+                        </div>
+                        <div class="info-item">
+                            <strong>Contact</strong>
+                            {{ filiale.email }} | {{ filiale.telephone }}
+                        </div>
+                        <div class="info-item">
+                            <strong>Horaires d'ouverture</strong>
+                            <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #666;">{{ filiale.horaires }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card-agence">
-                <div class="card-img-wrapper">
-                    <img src="{{ url_for('static', filename='IMAGE/marseille.jpg') }}" alt="Agence de Marseille">
-                    <span class="badge-status">Ouvert</span>
-                </div>
-                <div class="card-body">
-                    <h3>MARSEILLE</h3>
-                    <div class="info-item">
-                        <strong>Adresse</strong>
-                        30 Quai du Port, 13002 Marseille
-                    </div>
-                    <div class="info-item">
-                        <strong>Responsable d'agence</strong>
-                        Inès Rami
-                    </div>
-                    <div class="info-item">
-                        <strong>Contact</strong>
-                        marseille@techsecure.fr | +33 4 91 00 00 03
-                    </div>
-                    <div class="info-item">
-                        <strong>Horaires d'ouverture</strong>
-                        <ul class="horaires-list">
-                            <li><span>Lundi - Vendredi :</span> <span>09:00 - 12:00, 13:30 - 17:30</span></li>
-                            <li><span>Samedi - Dimanche :</span> <span style="color: #dc3545; font-weight: 500;">Fermé</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </section>
 
@@ -159,5 +124,57 @@
         <p>&copy; 2026 TechSecure Solutions - Infrastructure Web Sécurisée</p>
     </footer>
 
+    <script>
+        function updateStatus() {
+            const now = new Date();
+            const day = now.getDay(); 
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const timeInMinutes = hours * 60 + minutes;
+
+            function setBadge(id, isOpen) {
+                const badge = document.getElementById(id);
+                if (badge) {
+                    if (isOpen) {
+                        badge.innerText = "Ouvert";
+                        badge.className = "badge-status open";
+                    } else {
+                        badge.innerText = "Fermé";
+                        badge.className = "badge-status closed";
+                    }
+                }
+            }
+
+            // Agence PARIS : Lun-Jeu: 8h30-18h / Ven: 8h30-17h
+            let parisOpen = false;
+            if (day >= 1 && day <= 4) {
+                if (timeInMinutes >= (8*60+30) && timeInMinutes < (18*60)) parisOpen = true;
+            } else if (day === 5) {
+                if (timeInMinutes >= (8*60+30) && timeInMinutes < (17*60)) parisOpen = true;
+            }
+            setBadge("badge-paris", parisOpen);
+
+            // Agence LYON : Lun-Ven: 9h-12h30 et 14h-18h
+            let lyonOpen = false;
+            if (day >= 1 && day <= 5) {
+                const morning = (timeInMinutes >= 9*60 && timeInMinutes < (12*60+30));
+                const afternoon = (timeInMinutes >= 14*60 && timeInMinutes < 18*60);
+                if (morning || afternoon) lyonOpen = true;
+            }
+            setBadge("badge-lyon", lyonOpen);
+
+            // Agence MARSEILLE : Lun-Ven: 9h-12h et 13h30-17h30
+            let marseilleOpen = false;
+            if (day >= 1 && day <= 5) {
+                const morning = (timeInMinutes >= 9*60 && timeInMinutes < 12*60);
+                const afternoon = (timeInMinutes >= (13*60+30) && timeInMinutes < (17*60+30));
+                if (morning || afternoon) marseilleOpen = true;
+            }
+            setBadge("badge-marseille", marseilleOpen);
+        }
+
+        updateStatus();
+        setInterval(updateStatus, 60000);
+    </script>
 </body>
 </html>
