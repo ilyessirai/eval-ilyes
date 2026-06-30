@@ -17,7 +17,7 @@ Suivez ces étapes pour installer et lancer le projet sur votre machine en quelq
 Ouvrez un terminal et récupérez le dépôt GitHub :
 ```bash
 git clone https://github.com/ilyessirai/eval-ilyes
-cd eval-ilyes-web
+cd eval-ilyes
 
 3. Configurer l'environnement (.env)
 
