@@ -1,0 +1,24 @@
+# --- SÉCURITÉ (TRÈS IMPORTANT) ---
+# Ne jamais envoyer les variables d'environnement et les clés secrètes
+.env
+
+# --- PYTHON ---
+# Fichiers temporaires générés par Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# --- IDE / ÉDITEURS ---
+# Fichiers de configuration de VS Code ou PyCharm
+.vscode/
+.idea/
+
+# --- SYSTÈME ---
+# Fichiers système invisibles (notamment sur Mac)
+.DS_Store
+Thumbs.db
